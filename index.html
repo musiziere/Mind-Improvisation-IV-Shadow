@@ -1,1 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#050505" />
+  <title>Mind Improvisation IV: Shadow — Hyo Jee Kang</title>
+  <meta name="description" content="Mind Improvisation IV: Shadow — a project website for Hyo Jee Kang's developing live performance combining body, biosignals, AI, sound, physical material, and audience participation." />
+  <style>
+    :root{
+      --bg:#050505;--ink:#f1efe8;--muted:#b4b2ad;--line:#282828;--soft:#0d0d0d;
+      --accent:#d8f4ff;--accent2:#bfd2ff;--paper:#d7d0c3;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--bg)}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.6;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    img,video{display:block;max-width:100%}
+    .grain{position:fixed;inset:0;pointer-events:none;opacity:.08;mix-blend-mode:screen;background-image:radial-gradient(rgba(255,255,255,.28) .5px,transparent .8px);background-size:5px 5px;z-index:30}
+    nav{position:fixed;left:0;right:0;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:20px 30px;background:linear-gradient(to bottom,rgba(5,5,5,.92),rgba(5,5,5,.52),rgba(5,5,5,0));backdrop-filter:blur(6px)}
+    .brand{font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+    .navlinks{display:flex;gap:22px;font-size:12px;color:#cdcac4}
+    .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:0 5vw 7vh;overflow:hidden}
+    .hero:before{content:"";position:absolute;inset:0;background:
+      radial-gradient(circle at 18% 26%, rgba(255,255,255,.12), transparent 16%),
+      linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.34) 38%, rgba(0,0,0,.78) 73%, #050505 100%),
+      url('stage-still.jpg') center center/cover no-repeat;
+      filter:brightness(.52) contrast(1.08) saturate(.9)}
+    .hero:after{content:"";position:absolute;right:-8vw;top:-10vw;width:54vw;height:54vw;border-radius:50%;border:1px solid rgba(255,255,255,.06);box-shadow:0 0 160px rgba(198,210,255,.09) inset;animation:drift 16s ease-in-out infinite alternate}
+    @keyframes drift{to{transform:translate(-2vw,5vh) scale(1.04)}}
+    .hero-inner{position:relative;z-index:2;max-width:1200px}
+    .kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#dddcd5;margin-bottom:20px}
+    h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;line-height:.82;letter-spacing:-.055em;font-size:clamp(4rem,11vw,10rem);margin:0 0 20px}
+    h1 small{display:block;font-family:Inter,ui-sans-serif,sans-serif;font-size:clamp(.9rem,1.35vw,1.3rem);letter-spacing:.18em;text-transform:uppercase;color:#f3f3ef;margin-bottom:22px}
+    .hero-copy{max-width:780px;font-size:clamp(1.02rem,1.55vw,1.32rem);color:#e0ded8}
+    .dev-note{margin-top:22px;max-width:760px;font-size:.95rem;color:#bbb8b2;padding:13px 16px;border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.28);backdrop-filter:blur(6px)}
+    .scroll{margin-top:34px;display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:#bbb}
+    .scroll:before{content:"";width:44px;height:1px;background:#999}
 
+    section{padding:110px 6vw;border-top:1px solid var(--line)}
+    .section-grid{display:grid;grid-template-columns:minmax(160px,.7fr) minmax(0,2fr);gap:7vw;align-items:start}
+    .eyebrow{position:sticky;top:92px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#969894}
+    .lead{font-family:Georgia,"Times New Roman",serif;font-size:clamp(2.1rem,4.1vw,4.6rem);line-height:1.07;letter-spacing:-.025em;margin:0 0 40px;max-width:1120px}
+    .bodycopy{max-width:900px;color:#cbc8c2;font-size:18px}
+    .bodycopy p{margin:0 0 22px}
+    .bodycopy strong{color:#fff;font-weight:500}
+    .mini{font-size:14px;color:#a5a7a1;letter-spacing:.04em}
+    .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:clamp(1.9rem,3vw,3.6rem);line-height:1.15;max-width:980px;margin:70px 0 0;color:#ebe8e1}
+    .media-split{display:grid;grid-template-columns:1.15fr .85fr;gap:26px;margin-top:58px}
+    .panel{position:relative;overflow:hidden;background:#0d0d0d;border:1px solid #252525;min-height:470px}
+    .panel img{width:100%;height:100%;object-fit:cover;filter:grayscale(.3) contrast(1.06)}
+    .panel.signal img{filter:grayscale(1) contrast(1.24) brightness(.95)}
+    .panel-label{position:absolute;left:16px;bottom:14px;font-size:10px;letter-spacing:.16em;text-transform:uppercase;background:rgba(0,0,0,.58);padding:8px 10px;backdrop-filter:blur(8px)}
+    .matrix{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--line);border-top:1px solid var(--line);margin-top:68px}
+    .cell{min-height:165px;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:space-between}
+    .cell b{font-family:Georgia,serif;font-size:27px;font-weight:400}
+    .cell span{font-size:12px;color:#8f918d;text-transform:uppercase;letter-spacing:.12em}
+    .flow{list-style:none;padding:0;margin:48px 0 0;max-width:950px}
+    .flow li{display:grid;grid-template-columns:68px 1fr;gap:18px;padding:20px 0;border-top:1px solid #262626}
+    .flow .n{font-family:Georgia,serif;font-size:34px;color:#777}
+    .flow .t{font-size:19px;color:#d2d0cb}
+    .flow .t em{display:block;color:#8f918d;font-size:13px;margin-top:5px;font-style:normal}
+    .gallery-note{margin-top:8px;color:#989a96;font-size:14px}
+    .gallery{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:50px}
+    .shot{position:relative;overflow:hidden;background:#0b0b0b;border:1px solid #242424;min-height:250px}
+    .shot img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease, filter .8s ease}
+    .shot:hover img{transform:scale(1.025);filter:contrast(1.06)}
+    .shot.wide{grid-column:span 8;aspect-ratio:16/9}.shot.tall{grid-column:span 4;grid-row:span 2;min-height:580px}.shot.half{grid-column:span 6;aspect-ratio:4/3}.shot.third{grid-column:span 4;aspect-ratio:4/3}
+    .shot figcaption{position:absolute;left:14px;bottom:12px;font-size:10px;letter-spacing:.13em;text-transform:uppercase;background:rgba(0,0,0,.58);padding:7px 9px;backdrop-filter:blur(8px)}
+
+    .motion-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:52px}
+    .motion-card{border:1px solid #262626;background:#0a0a0a;overflow:hidden}
+    .motion-card video{width:100%;aspect-ratio:16/9;object-fit:cover;background:#000}
+    .motion-card.feature{grid-column:1/-1}
+    .motion-meta{display:flex;justify-content:space-between;gap:18px;padding:12px 14px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#9ea09c}
+
+    .festival{background:linear-gradient(135deg,#090909,#111214 58%,#060606);position:relative;overflow:hidden}
+    .festival:before{content:"TRANS";position:absolute;right:-.05em;top:-.12em;font-family:Georgia,serif;font-size:22vw;color:rgba(255,255,255,.018);line-height:.8}
+    .festival .bodycopy{position:relative;z-index:2}
+    .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:36px}
+    .tag{border:1px solid #3b3b3b;border-radius:999px;padding:8px 12px;font-size:11px;letter-spacing:.08em;color:#bbb}
+
+    .artist{display:grid;grid-template-columns:.8fr 1.2fr;gap:6vw;align-items:start}
+    .artist-photo{aspect-ratio:4/5;overflow:hidden;border:1px solid #292929}
+    .artist-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(.18) contrast(1.03)}
+    .bio h2{font-family:Georgia,serif;font-size:clamp(2.5rem,4.8vw,5.6rem);font-weight:400;line-height:.95;margin:0 0 28px}
+    .bio p{font-size:17px;color:#c9c7c2;max-width:800px}
+    .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin-top:28px;font-size:13px;color:#9b9d99}
+    .facts div{padding:11px 0;border-top:1px solid #292929}
+    footer{padding:70px 6vw 85px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:30px;align-items:flex-end}
+    .footer-title{font-family:Georgia,serif;font-size:clamp(2.4rem,6vw,6rem);line-height:.9}
+    .footer-meta{text-align:right;font-size:12px;color:#999;line-height:1.9}
+    .footer-meta a{color:#ccc}
+    @media(max-width:860px){
+      nav{padding:16px 18px}.navlinks{display:none}.hero{padding:0 20px 54px}
+      section{padding:80px 20px}.section-grid,.artist,.media-split{grid-template-columns:1fr}.eyebrow{position:static}.matrix{grid-template-columns:1fr 1fr}
+      .bodycopy{font-size:16px}.panel{min-height:330px}.gallery{grid-template-columns:1fr}
+      .shot,.shot.wide,.shot.tall,.shot.half,.shot.third{grid-column:auto;grid-row:auto;min-height:0;aspect-ratio:4/3}.shot.tall{aspect-ratio:3/4}
+      .motion-grid{grid-template-columns:1fr}.motion-card.feature{grid-column:auto}
+      footer{display:block;padding:60px 20px}.footer-meta{text-align:left;margin-top:26px}.facts{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<div class="grain"></div>
+<nav>
+  <a class="brand" href="#top">Hyo Jee Kang · Shadow</a>
+  <div class="navlinks">
+    <a href="#concept">Concept</a>
+    <a href="#system">Live System</a>
+    <a href="#images">Images</a>
+    <a href="#motion">Video</a>
+    <a href="#transmediale">Context</a>
+    <a href="#artist">Artist</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="kicker">Mind Improvisation IV · project website / work in development</div>
+    <h1><small>Hyo Jee Kang</small>Shadow</h1>
+    <div class="hero-copy">A live performance environment in which bodies, biosignals, sound, AI, memory, paper, ink and unstable understanding continually transform one another. Failure, delay and distortion are not removed; they become openings.</div>
+    <div class="dev-note"><strong>Development note:</strong> <em>Shadow</em> has not yet premiered. This site brings together development images, related performance documentation, reference videos and project texts to communicate the work’s conceptual and visual direction — imagined as a very dark environment with sparse pin-lighting, breath-like pacing and shifting relations between body, sound, data and material.</div>
+    <a href="#concept" class="scroll">Enter the work</a>
+  </div>
+</header>
+
+<section id="concept">
+  <div class="section-grid">
+    <div class="eyebrow">01 · Concept</div>
+    <div>
+      <p class="lead">What is a work, if neither its origin nor the person perceiving it can remain unchanged?</p>
+      <div class="bodycopy">
+        <p><em>Mind Improvisation IV: Shadow</em> develops Hyo Jee Kang’s long-term practice of <strong>Conceptual Transformation</strong>. Transformation is not treated as a one-way passage from original to copy. What has been transformed can alter what seemed to precede it; mediation changes what passes through it, and the changed thing can return to transform its source.</p>
+        <p><em>Shadow</em> begins from this nonlinear condition. Neural activity, physiological signals, movement, voice, acoustic sound, live electronics, AI interaction, physical material and audience participation enter a changing field in which no single element holds final authority. The work remains within tensions between measurement and experience, correlation and meaning, intention and involuntary response, human and nonhuman, past and present.</p>
+        <p>Misunderstanding is central. In Hyo Jee Kang’s process, moments in which technological systems respond without fully understanding are not treated as simple errors to erase. They become material. Delay, distortion, failed translation and incomplete perception reveal the gap between what is sensed, what is processed, and what is lived.</p>
+      </div>
+      <p class="quote">“The mirror changes what it reflects, and what it reflects changes the mirror.”</p>
+    </div>
+  </div>
+</section>
+
+<section id="system">
+  <div class="section-grid">
+    <div class="eyebrow">02 · Live System</div>
+    <div>
+      <p class="lead">Not a hierarchy of performer and tool, but a live relational system.</p>
+      <div class="bodycopy">
+        <p>The performance combines piano, Korean <em>Sori Buk</em>, voice, breath-based instruments, live electronics, neural and physiological sensing, machine learning, physical materials, projected visual forms and audience intervention. Participating audience members may also contribute neural and physiological signals, altering the conditions to which performer and system respond.</p>
+        <p>Deep-learning processes search for patterns inside changing data; sound is filtered and transformed in real time; the performer answers through gesture, speech, acoustic action and improvisation. These responses alter the next conditions from which data and action emerge. The work is therefore not a fixed mapping of signal to output, but an evolving loop of transformation.</p>
+      </div>
+      <div class="media-split">
+        <figure class="panel"><img src="participant-paper.jpg" alt="Performer with participant wearing a sensor"><figcaption class="panel-label">Audience signal / paper / performer</figcaption></figure>
+        <figure class="panel signal"><img src="fnirs-map.png" alt="fNIRS brain interface"><figcaption class="panel-label">fNIRS / measured activity</figcaption></figure>
+      </div>
+      <div class="matrix">
+        <div class="cell"><span>Signals</span><b>Neural activity</b></div>
+        <div class="cell"><span>Signals</span><b>Heart-rate & movement</b></div>
+        <div class="cell"><span>Acoustic</span><b>Piano · Sori Buk · voice</b></div>
+        <div class="cell"><span>Computation</span><b>AI / live electronics</b></div>
+        <div class="cell"><span>Material</span><b>Ink · paper · wire</b></div>
+        <div class="cell"><span>Visual</span><b>Projected forms</b></div>
+        <div class="cell"><span>Participation</span><b>Audience as co-creator</b></div>
+        <div class="cell"><span>Condition</span><b>Liveness / uncertainty</b></div>
+      </div>
+      <ol class="flow">
+        <li><div class="n">1</div><div class="t">Body, signal and environment enter the same field.<em>Nothing remains external to the changing conditions.</em></div></li>
+        <li><div class="n">2</div><div class="t">Patterns are sensed, learned, transformed and reintroduced.<em>Data does not reveal inner truth; it becomes one participant among others.</em></div></li>
+        <li><div class="n">3</div><div class="t">Improvisation changes subsequent conditions.<em>Each response becomes part of what later can happen.</em></div></li>
+        <li><div class="n">4</div><div class="t">Audience signals and perception matter.<em>The work is formed collectively, not only presented.</em></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="images">
+  <div class="section-grid">
+    <div class="eyebrow">03 · Images</div>
+    <div>
+      <p class="lead">Process images, related works and visual references for the atmosphere of <em>Shadow</em>.</p>
+      <div class="bodycopy">
+        <p>Because <em>Shadow</em> is still in development, the images below are assembled as a project constellation: performance documentation, sensing experiments, stage references, projection studies and material actions that shape the imagined premiere environment.</p>
+      </div>
+      <div class="gallery-note">Darkness, pin-lighting, breath-like pacing, projected signal forms, neural interfaces, audience proximity, Sori Buk, paper, ink and embodied technological encounter.</div>
+      <div class="gallery">
+        <figure class="shot wide"><img src="stage-still.jpg" alt="Dark stage with piano, performer and Sori Buk"><figcaption>Imagined stage atmosphere</figcaption></figure>
+        <figure class="shot tall"><img src="hero.jpg" alt="Performer silhouette with projection"><figcaption>Projection / silhouette / light</figcaption></figure>
+        <figure class="shot half"><img src="live-brain-laptop.jpg" alt="Laptop with brain display beside Korean drum"><figcaption>Live sensing / acoustic material</figcaption></figure>
+        <figure class="shot half"><img src="ink-paper-performance.jpg" alt="Ink and paper performance with audience"><figcaption>Ink / paper / live action</figcaption></figure>
+        <figure class="shot half"><img src="growing-seeds-blue.jpg" alt="Blue signal-like projection"><figcaption>Signal form / projection reference</figcaption></figure>
+        <figure class="shot half"><img src="growing-seeds-new.jpg" alt="Circular generative projection"><figcaption>Generative visual field</figcaption></figure>
+        <figure class="shot third"><img src="performance-brain.jpg" alt="Performance with projected brain image"><figcaption>Brain image / performer / participant</figcaption></figure>
+        <figure class="shot third"><img src="sori-buk.jpg" alt="Korean drum and materials"><figcaption>Sori Buk / object presence</figcaption></figure>
+        <figure class="shot third"><img src="shadow-signal.jpg" alt="Signal image"><figcaption>Shadow / signal / distortion</figcaption></figure>
+        <figure class="shot wide"><img src="stage-projection.jpg" alt="Large stage projection with performer"><figcaption>Body inside projection space</figcaption></figure>
+        <figure class="shot half"><img src="melodica-gong.jpg" alt="Performer playing melodica and gong"><figcaption>Breath / percussion / improvisation</figcaption></figure>
+        <figure class="shot half"><img src="melodica-gong-2.jpg" alt="Performer playing melodica and gong in close-up"><figcaption>Layered action / live response</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="motion">
+  <div class="section-grid">
+    <div class="eyebrow">04 · Video</div>
+    <div>
+      <p class="lead">Moving-image references from performance studies and related live situations.</p>
+      <div class="bodycopy">
+        <p>These video clips are included as part of the project website to convey how the work breathes through duration, hesitation, interruption, bodily response and changing conditions. They are presented as development references rather than as a finished documentation of <em>Shadow</em>.</p>
+      </div>
+      <div class="motion-grid">
+        <div class="motion-card feature"><video controls preload="metadata" poster="20541-poster.jpg"><source src="20541.mp4" type="video/mp4"></video><div class="motion-meta"><span>Performance study</span><span>body / percussion / piano</span></div></div>
+        <div class="motion-card"><video controls preload="metadata" poster="20536-poster.jpg"><source src="20536.mp4" type="video/mp4"></video><div class="motion-meta"><span>Signal encounter</span><span>screen / performer / response</span></div></div>
+        <div class="motion-card"><video controls preload="metadata" poster="20535-poster.jpg"><source src="20535.mp4" type="video/mp4"></video><div class="motion-meta"><span>Live interaction</span><span>device / piano / transformation</span></div></div>
+        <div class="motion-card"><video controls preload="metadata" poster="20525-poster.jpg"><source src="20525.mp4" type="video/mp4"></video><div class="motion-meta"><span>Material action</span><span>ink / paper / audience</span></div></div>
+        <div class="motion-card"><video controls preload="metadata" poster="20524-poster.jpg"><source src="20524.mp4" type="video/mp4"></video><div class="motion-meta"><span>Process field</span><span>gesture / trace / collective presence</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="failure">
+  <div class="section-grid">
+    <div class="eyebrow">05 · Failure / Delay / Mirror</div>
+    <div>
+      <p class="lead">A misunderstanding can remain in the work rather than being corrected away.</p>
+      <div class="bodycopy">
+        <p>In the making process, ChatGPT responded as though it could hear musical sounds it could not actually hear. That misunderstanding did not merely expose a technical limitation; it altered the artist’s perception of the exchange, and that altered the work itself. Previous conversations, questions, corrections and failures can therefore re-enter the live performance as ready-made material.</p>
+        <p><strong>Shadow is a multidimensional mirror.</strong> The body is reflected through biosignals, sound through live electronics, the past through fragments and recorded traces, and experience through perception and understanding. Yet the mirror does not preserve intact what it encounters. Every passage transforms.</p>
+        <p>Delay is equally fundamental. What happens, what is sensed, what is processed, what is heard, what is perceived and what is understood do not occupy the same moment. The piece inhabits that temporal slippage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="festival" id="transmediale">
+  <div class="section-grid">
+    <div class="eyebrow">06 · Context</div>
+    <div>
+      <p class="lead">The project resonates strongly with transmediale’s interest in unfinished systems, collective response, multiple futures and embodied technological life.</p>
+      <div class="bodycopy">
+        <p>What feels closest is a shared understanding of art as an open process of questioning, sharing, communication and transformation. <em>Shadow</em> does not present technology as a solved structure or a spectacle of innovation. It creates a live situation in which unstable relations remain open long enough to be experienced, discussed and transformed.</p>
+        <p>The work is especially close to curatorial concerns around incompleteness, disagreement, decentralised relation, embodied reflection and the human scale of technology. Hyo Jee Kang’s practice has long focused on the unstable line between human and nonhuman, intention and accident, individual and collective, fear and curiosity, present and future.</p>
+        <p>The political dimension of the project lies here: not in replacing one authority with another, but in making it difficult for any single position — artist, audience, sensor, dataset, algorithm or interpretation — to claim final authority over what the work means.</p>
+      </div>
+      <div class="tags">
+        <span class="tag">transformation</span>
+        <span class="tag">embodied technology</span>
+        <span class="tag">collective response</span>
+        <span class="tag">error as opening</span>
+        <span class="tag">multiple futures</span>
+        <span class="tag">critical AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="audience">
+  <div class="section-grid">
+    <div class="eyebrow">07 · Format & Audience</div>
+    <div>
+      <p class="lead">A performance to be entered, not simply watched.</p>
+      <div class="bodycopy">
+        <p><em>Shadow</em> is conceived as a live, interdisciplinary and site-responsive performance for black-box theatres, galleries, media-art spaces and festival contexts. It combines voice, acoustic sound, movement, live electronics, neural and physiological sensing, AI interaction, deep-learning pattern recognition and physical materials such as ink, paper, wire and lantern-like forms.</p>
+        <p>The work is intended for audiences interested in contemporary art, sound, performance, media culture, embodiment and critical questions around AI and sensing technology. No specialist knowledge is required. With prior consent, selected audience members may contribute live biosignals and interaction, entering the work as co-creators rather than only spectators.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="artist">
+  <div class="artist">
+    <div class="artist-photo"><img src="portrait.jpg" alt="Portrait of Hyo Jee Kang"></div>
+    <div class="bio">
+      <div class="eyebrow" style="position:static;margin-bottom:28px">08 · Artist</div>
+      <h2>Hyo Jee Kang</h2>
+      <p>Hyo Jee Kang is a composer-pianist, performer and artist-researcher whose work moves across music, improvisation, performance, media art, technology and embodied presence. Trained in Korea and Germany, she studied music education, piano and composition at the Hochschule für Musik, Theater und Medien Hannover, completed the Konzertexamen in piano, and later earned a DMA in Composition from Seoul National University.</p>
+      <p>Her practice explores how bodies, sound, data, memory, technology and audiences transform one another. Previous projects have connected live electronics, fNIRS neural data, biosignals, AI, VR, hologram, Disklavier, Korean traditional instruments, movement and participatory structures. She is Associate Professor at Korea National University of Transportation and Artistic Director of Creative Minds Lab MAG.</p>
+      <div class="facts">
+        <div>Conceptual Transformation</div><div>Composer · Pianist · Performer</div>
+        <div>Artist-researcher</div><div>Seoul · Hannover</div>
+        <div>Improvisation · Media art · AI</div><div>Creative Minds Lab MAG</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-title">Shadow<br><span style="color:#747474">remains in motion.</span></div>
+  <div class="footer-meta">Mind Improvisation IV<br>Hyo Jee Kang<br>Creative Minds Lab MAG<br><a href="mailto:creativemindslabmag@gmail.com">creativemindslabmag@gmail.com</a></div>
+</footer>
+
+<script>
+  const panels=[...document.querySelectorAll('.panel img')];
+  window.addEventListener('mousemove',e=>{
+    const x=(e.clientX/window.innerWidth-.5)*8;
+    const y=(e.clientY/window.innerHeight-.5)*8;
+    panels.forEach((p,i)=>{p.style.transform=`scale(1.02) translate(${x*(i?-.18:.12)}px,${y*(i?.14:-.12)}px)`});
+  },{passive:true});
+</script>
+</body>
+</html>
